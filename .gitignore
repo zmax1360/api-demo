@@ -11,8 +11,13 @@ pom.xml.asc
 /.prepl-port
 .hgignore
 .hg/
+# Tooling caches
 .calva/
-.clj-kondo/.cache/v1
-.lsp/.cache      
+.clj-kondo/.cache/
+.lsp/.cache/
+# Editors
 .vscode/
 .idea/
+.idea/
+# OS
+.DS_Store
