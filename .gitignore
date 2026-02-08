@@ -1,23 +1,20 @@
+# Build
 /target
 /classes
-/checkouts
-profiles.clj
-pom.xml
-pom.xml.asc
-*.jar
-*.class
-/.lein-*
+
+# REPL / tooling
+/.lein-repl-history
 /.nrepl-port
-/.prepl-port
-.hgignore
-.hg/
-# Tooling caches
+/.cpcache
+
+# Calva / VS Code / IntelliJ
 .calva/
-.clj-kondo/.cache/
-.lsp/.cache/
-# Editors
 .vscode/
 .idea/
-.idea/
+
+# Linters / LSP caches
+.clj-kondo/.cache/
+.lsp/.cache/
+
 # OS
 .DS_Store
