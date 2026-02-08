@@ -12,3 +12,7 @@ pom.xml.asc
 .hgignore
 .hg/
 .calva/
+.clj-kondo/.cache/v1
+.lsp/.cache      
+.vscode/
+.idea/
