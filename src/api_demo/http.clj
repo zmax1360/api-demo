@@ -3,7 +3,9 @@
    [api-demo.store.person :as store]
    [cheshire.core :as json]
    [clojure.tools.logging :as log]
-   [reitit.ring :as ring]))
+   [reitit.openapi :as openapi]
+   [reitit.ring :as ring]
+   [reitit.swagger-ui :as swagger-ui]))
 
 (defn json-response [status body]
   {:status status
@@ -39,12 +41,28 @@
       (log/info "Deleted person" id)
       (json-response 200 {:status "deleted"}))
     (json-response 404 {:error "Person not found"})))
-(defn not-found [_]
-  (json-response 404 {:error "the Page you request is not found"}))
+
+
 
 (def app
   (ring/ring-handler
    (ring/router
-    [["/persons" {:get list-persons :post create-person}]
-     ["/persons/:id" {:get get-person :delete delete-person}]])
+    [["/openapi.json"
+      {:get {:no-doc true
+             :handler (openapi/create-openapi-handler)}}]
+
+     ["/swagger-ui/*"
+      {:get {:no-doc true
+             :handler (swagger-ui/create-swagger-ui-handler
+                       {:url "/openapi.json"})}}]
+
+     ["/persons"
+      {:get list-persons
+       :post create-person}]
+
+     ["/persons/:id"
+      {:get get-person
+       :delete delete-person}]]
+    {:data {:openapi {:info {:title "Person API"
+                             :version "1.0.0"}}}})
    (ring/create-default-handler)))

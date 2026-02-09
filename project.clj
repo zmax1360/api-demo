@@ -10,7 +10,21 @@
                  [ch.qos.logback/logback-classic "1.5.6"]
                  [ring/ring-core "1.12.2"]
                  [ring/ring-jetty-adapter "1.12.2"]
-                 [metosin/reitit-ring "0.7.2"]]
+                 [metosin/reitit-ring "0.7.2"]
+                 ;; Reitit (routing)
+                 [metosin/reitit-ring "0.10.0"]
+
+                 ;; OpenAPI spec generator
+                 [fi.metosin/reitit-openapi "0.10.0"]
+
+                 ;; Swagger UI
+                 [metosin/reitit-swagger-ui "0.10.0"]
+                 [com.fasterxml.jackson.core/jackson-annotations "2.17.2"]
+                 [com.fasterxml.jackson.core/jackson-core "2.17.2"]
+                 [com.fasterxml.jackson.core/jackson-databind "2.17.2"]
+                 [com.fasterxml.jackson.datatype/jackson-datatype-jsr310 "2.17.2"]
+                 [com.fasterxml.jackson.dataformat/jackson-dataformat-smile "2.17.2"]
+                 [com.fasterxml.jackson.dataformat/jackson-dataformat-cbor "2.17.2"]]
   :main ^:skip-aot api-demo.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
