@@ -1,8 +1,10 @@
 (ns api-demo.core
   (:gen-class)
   (:require
+   [api-demo.http :as http]
    [clj-http.client :as client]
-   [clojure.tools.logging :as log]))
+   [clojure.tools.logging :as log]
+   [ring.adapter.jetty :as jetty]))
 
 (defn fetch-data
   "Fetches a cat fact from the API and returns the fact string."
@@ -20,6 +22,20 @@
       (log/error "Network/Request error. URL:" url "Message:" (.getMessage e))
       "Could not fetch cat fact right now.")))
 
+(defonce server (atom nil))
+
+(defn start!
+  []
+  (when-not @server
+    (reset! server (jetty/run-jetty http/app {:port 3000 :join? false}))
+    (log/info "Server started on port 3000")))
+
+(defn stop!
+  []
+  (when-let [s @server]
+    (.stop s)
+    (reset! server nil)
+    (log/info "Server stopped")))
 
 ;; Main prints (IO happens here)
 (defn -main
